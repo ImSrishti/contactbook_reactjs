@@ -1,0 +1,43 @@
+.add{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin:15px;
+    width:98%;
+    height: 98%;
+    box-shadow: 0 0 1px 0px black;
+    overflow-y:scroll;
+    border-radius: 17px;
+    padding-top: 5px;
+}
+.add div{
+    width: 80%;
+display: flex;
+    justify-content: center;
+    align-items: center;
+}
+label{
+    font-size: 26px;
+}
+
+.add_info_button{
+    background-color: #4CAF50; 
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+      border-radius: 9px;
+      margin:22px;
+      box-shadow: 0 0 2px 0px black;
+    
+    }
+
+    .add_info_button:hover{
+        background-color: #159619;
+    }
