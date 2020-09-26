@@ -6,6 +6,8 @@ import {remove,changeSort} from '../../redux/actions'
 import './Home.css'
 function Home(props) {
 
+    const [searchtext,setSearchText] = useState('')
+
     const handledropdown = (s) => {
         if(s.target.value==="SORT BY ASC"){
             props.changeSort('ASC')
@@ -23,7 +25,7 @@ function Home(props) {
         <div className="home">
             <div className="contact_list">
                 <div className="search_input">
-                    <input className="search_input_box" placeholder="search contact or add contact" />
+                    <input className="search_input_box" placeholder="search" onChange={e=>setSearchText(e.target.value)}/>
                 </div>
                 <div className="add_button">
                     <Link to="/add"><button className="button button1">ADD</button></Link>
@@ -33,7 +35,21 @@ function Home(props) {
                     </select>
                 </div>
             </div>
-            {props.list.map((x, i) => (
+            {props.list.filter(x=>{
+                if(searchtext===''){
+                    return true
+                }else{
+
+                    var str = x.name;
+                    var patt = new RegExp(searchtext);
+                    var res = patt.test(str);
+                    if(res){
+                        return true
+                    }else{
+                        return false
+                    }
+                }
+            }).map((x, i) => (
                 <div className="contact_list" key={i}>
                     <div className="name_list"><Link to={`/details/${x.name}`} style={{"textDecoration":"none","color":"black"}}>{x.name} </Link></div>
                     <div className="edit_delete_button">
