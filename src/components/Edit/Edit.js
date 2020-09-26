@@ -6,9 +6,9 @@ import {getdetails} from '../../redux/selector'
 import './Edit.css'
 function Edit(props) {
     let {id} =useParams();
-    const [name, setname] = useState(id)
-    const [contact, setcontact] = useState(0)
-    const [email, setemail] = useState('')
+    const [name, setname] = useState(props.details[id].name)
+    const [contact, setcontact] = useState(props.details[id].contact)
+    const [email, setemail] = useState(props.details[id].email)
     const [redirect, setredirect] = useState(false)
     const editContacts = () =>{
         const temp = {name: name ,contact:contact, email:email,id:id}
@@ -19,17 +19,17 @@ function Edit(props) {
         <div className="edit">
              <div>
                 <div> <label>Name:</label></div>
-                <div> <input placeholder={id} onChange={(e) => setname(e.target.value)} /></div>
+                <div> <input placeholder={props.details[id].name} onChange={(e) => setname(e.target.value)} /></div>
             </div>
             <div>
                 <div> <label>Contact No:</label></div>
-                <div>  <input onChange={(e) => setcontact(e.target.value)} /></div>
+                <div>  <input placeholder={props.details[id].contact} onChange={(e) => setcontact(e.target.value)} /></div>
             </div>
             <div>
                 <div> <label>Email:</label></div>
-                <div> <input onChange={(e) => setemail(e.target.value)}/></div>
+                <div> <input placeholder={props.details[id].email} onChange={(e) => setemail(e.target.value)}/></div>
             </div>
-            <button onClick={()=>editContacts()} className="add_info_button">Edit</button>
+            <button onClick={()=>editContacts()} className="add_info_button">Update</button>
             {redirect ? <Redirect to="/" /> : null}
         </div>
     )

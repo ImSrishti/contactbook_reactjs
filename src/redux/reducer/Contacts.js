@@ -1,6 +1,8 @@
 import {ADD,EDIT,DELETE} from '../actionTypes'
+
 const initialState = {
-    data: []
+    data: [],
+    filter:'ASC'
 }
 
 export default function (state = initialState, action) {
@@ -8,6 +10,7 @@ export default function (state = initialState, action) {
         case(ADD):{
             const {content} = action.payload
             return {
+                ...state,
                 data:[content,...state.data]
             }
         }
@@ -22,8 +25,9 @@ export default function (state = initialState, action) {
             }
             if (index !== -1)
                 temp.splice(index, 1,{name:content.name,contact:content.contact,email:content.email});
-            debugger
+            
             return {
+                ...state,
                 data:[...temp]
             }
         }
@@ -39,7 +43,16 @@ export default function (state = initialState, action) {
             if (index !== -1)
                 temp.splice(index, 1);
             return {
+                ...state,
                 data:[...temp]
+            }
+        }
+        case('SORT'):{
+            const {content} = action.payload
+            
+            return {
+                ...state,
+                filter:content
             }
         }
         default:{

@@ -1,23 +1,22 @@
 import React,{useState} from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { sortbyasc,sortbydsc } from '../../redux/selector'
-import {deletes} from '../../redux/actions'
+import { getList } from '../../redux/selector'
+import {remove,changeSort} from '../../redux/actions'
 import './Home.css'
 function Home(props) {
-    const [names, setnames] = useState(props.sortedbyasc)
- //   const [sort, setsort] = useState(initialState)
-    const handledropdown = (s) => {
-        if(s.target.value==="SORT BY ASC")
-        setnames(props.sortedbyasc)
-        else 
-        setnames(props.sortedbydsc)
 
+    const handledropdown = (s) => {
+        if(s.target.value==="SORT BY ASC"){
+            props.changeSort('ASC')
+        }else{
+            props.changeSort('DEC') 
+        }
     }
 
     const deletescontact =(name) =>{
-        props.deletes(name)
-        setnames(props.sortedbyasc)
+        props.remove(name)
+        //setnames(props.sortedbyasc)
     }
     
     return (
@@ -34,12 +33,12 @@ function Home(props) {
                     </select>
                 </div>
             </div>
-            {names.map((name, i) => (
+            {props.list.map((x, i) => (
                 <div className="contact_list" key={i}>
-                    <div className="name_list"><Link to={`/details/${name}`} style={{"textDecoration":"none","color":"black"}}>{name} </Link></div>
+                    <div className="name_list"><Link to={`/details/${x.name}`} style={{"textDecoration":"none","color":"black"}}>{x.name} </Link></div>
                     <div className="edit_delete_button">
-                       <Link to={`/edit/${name}`}><button className="button edit_button">EDIT</button></Link> 
-                        <button onClick={()=>deletescontact(name)} className="button delete_button">DELETE</button>
+                       <Link to={`/edit/${x.name}`}><button className="button edit_button">EDIT</button></Link> 
+                        <button onClick={()=>deletescontact(x.name)} className="button delete_button">DELETE</button>
                     </div>
                 </div>
             ))}
@@ -50,11 +49,8 @@ function Home(props) {
 }
 
 const mapStateToProps = (state) => {
-    const sortedbyasc = sortbyasc(state)
-    const sortedbydsc=sortbydsc(state)
-    return {sortedbydsc,sortedbyasc}
+    const list = getList(state)
+    return {list}
 }
 
-
-
-export default connect(mapStateToProps, {deletes})(Home)
+export default connect(mapStateToProps, {remove,changeSort})(Home)
