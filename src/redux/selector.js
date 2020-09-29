@@ -11,7 +11,7 @@ export const getList = (state) => {
     
     let sortedArray = []
 
-    if (state.Contacts.filter == 'ASC') {
+    if (state.Contacts.filter === 'ASC') {
         sortedArray = [...state.Contacts.data.sort((x, y) => {
             if (x.name > y.name) {
                 return 1
