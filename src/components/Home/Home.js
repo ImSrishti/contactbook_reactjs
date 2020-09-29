@@ -28,11 +28,12 @@ function Home(props) {
                     <input className="search_input_box" placeholder="search" onChange={e=>setSearchText(e.target.value)}/>
                 </div>
                 <div className="add_button">
-                    <Link to="/add"><button className="button button1">ADD</button></Link>
-                    <select className="sort" onChange={(e)=>handledropdown(e)}>
+                <select className="sort" onChange={(e)=>handledropdown(e)}>
                         <option>SORT BY ASC</option>
                         <option>SORT BY DESC</option>
                     </select>
+                    <Link to="/add"><button className="button button1">ADD</button></Link>
+                    
                 </div>
             </div>
             {props.list.filter(x=>{

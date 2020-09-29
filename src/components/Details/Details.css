@@ -8,7 +8,7 @@
     height: 98%;
     box-shadow: 0 0 1px 0px black;
     overflow-y:scroll;
-    border-radius: 17px;
+    border-radius: 5px;
     padding-top: 5px;
 }
 .detail div{
@@ -38,7 +38,7 @@ label{
       font-size: 16px;
       transition-duration: 0.4s;
       cursor: pointer;
-      border-radius: 9px;
+      border-radius: 5px;
       margin:22px;
       box-shadow: 0 0 2px 0px black;
     
